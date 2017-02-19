@@ -1,0 +1,27 @@
+启动:
+1. sudo mongod 启动数据库
+2. mongo 连接数据库,准备测试
+3. grunt启动服务
+4. pm2 start npm -- run start 或者 pm2 start npm --name "AppName" -i 0 -- run start
+
+/*示例*/
+E:\MongoDB\bin>mongo
+MongoDB shell version: 2.6.5
+connecting to: test
+> use demodb
+switched to db demodb
+> db.FirstCollection.insert({name:"jack",age:22})
+WriteResult({ "nInserted" : 1 })
+> show collections
+FirstCollection
+system.indexes
+> db.getCollectionNames()
+[ "FirstCollection", "system.indexes" ]
+> db.demodb.find()
+{ "_id" : ObjectId("543731431dc491f307663a0d"), "name" : "jack", "age" : 22 }
+> db.system.indexes.find()
+{ "v" : 1, "key" : { "_id" : 1 }, "name" : "_id_", "ns" : "demodb.FirstCollection" }
+> db.Student.insert({name:"jack",sex:1,age:33})
+> db.Student.update({name:"jack"},{$set:{age:55}})
+> db.Student.count({name:null})
+> db.Student.find({name:null}).count()

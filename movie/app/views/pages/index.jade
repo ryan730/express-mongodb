@@ -1,0 +1,59 @@
+extends ../layout
+
+block content
+  .container
+    .row
+      each cat in categories
+        .panel.panel-default
+          .panel-heading
+            h3
+              a(href='/results?cat=#{cat._id}&p=0') #{cat.name}
+          .panel-body
+            if cat.movies && cat.movies.length > 0
+              each item in cat.movies
+                .col-md-2
+                  .thumbnail
+                    a(href="/movie/#{item._id}")
+                      if item.poster.indexOf('http:') > -1
+                        img(src="#{item.poster}", alt="#{item.title}")
+                      else
+                        img(src="/upload/#{item.poster}", alt="#{item.title}")
+                    .caption
+                      h4 #{item.title}
+                      p: a.btn.btn-primary(href="/movie/#{item._id}", role="button") 观看预告片
+      .native-target
+        ol.breadcrumb
+          .li.list-group-item
+            a(href="/user/signup" type='post') /user/signup
+          .li.list-group-item
+            a(href="/user/signin" type='post') /user/signin
+          .li.list-group-item
+            a(href="/signin" type='get') /signin
+          .li.list-group-item
+            a(href="/logout" type='get') /logout
+          .li.list-group-item
+            a(href="/admin/user/list" type='get') /admin/user/list
+          .li.list-group-item
+            a(href="/movie/:id" type='get') /movie/:id
+          .li.list-group-item
+            a(href="/admin/movie/new" type='get') /admin/movie/new
+          .li.list-group-item
+            a(href="/admin/movie/update/:id" type='get') /admin/movie/update/:id
+          .li.list-group-item
+            a(href="/admin/movie" type='post') /admin/movie
+          .li.list-group-item
+            a(href="/admin/movie/list" type='get') /admin/movie/list
+          .li.list-group-item
+            a(href="/admin/movie/list" type='delete') /admin/movie/list
+          .li.list-group-item
+            a(href="/user/comment" type='post') /user/comment
+          .li.list-group-item
+            a(href="/admin/category/new" type='get') /admin/category/new
+          .li.list-group-item
+            a(href="/admin/category" type='post') /admin/category
+          .li.list-group-item
+            a(href="/admin/category/list" type='get') /admin/category/list
+          .li.list-group-item
+            a(href="/results" type='get') /results
+        ol.breadcrumb
+
